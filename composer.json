@@ -1,0 +1,47 @@
+{
+    "name": "shennyg/azure-blob-remote-volume",
+    "description": "Azure Blob Remote Volume plugin for Craft CMS 3.x",
+    "type": "craft-plugin",
+    "version": "0.1.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "flysystem",
+        "yii2",
+        "microsoft",
+        "azure-storage-blob",
+        "azure blob remote volume"
+    ],
+    "support": {
+        "docs": "https://github.com/shennyg/azure-blob-remote-volume/blob/master/README.md",
+        "issues": "https://github.com/shennyg/azure-blob-remote-volume/issues",
+        "source": "https://github.com/shennyg/azure-blob-remote-volume",
+        "rss": "https://github.com/shennyg/azure-blob-remote-volume/commits/master.atom"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shen DeShayne",
+            "homepage": "https://sunnybyte.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1",
+        "league/flysystem-azure-blob-storage": "^0.1.5"
+    },
+    "autoload": {
+        "psr-4": {
+          "shennyg\\azureblobremotevolume\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Azure Blob Remote Volume",
+        "handle": "azure-blob-remote-volume",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/shennyg/azure-blob-remote-volume/master/CHANGELOG.md",
+        "class": "shennyg\\azureblobremotevolume\\AzureBlobRemoteVolume"
+    }
+}
