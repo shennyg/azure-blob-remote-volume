@@ -33,9 +33,9 @@ composer require shennyg/azure-blob-remote-volume
 
 ## Setup
 
-To create a new asset volume for your Amazon S3 bucket, go to Settings → Assets, create a new volume, and set the Volume Type setting to "Azure".
+To create a new asset volume for your Azure Blob container, go to Settings → Assets, create a new volume, and set the Volume Type setting to "Azure". Toggle "Assets in this volume have public URLs" on and enter the base URL. Normally something like https://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/AZURE_STORAGE_CONTAINER_NAME/ or 
 
-The following settings can be need to be environment variables. See [Environmental Configuration](https://docs.craftcms.com/v3/config/environments.html) in the Craft docs to learn more about that.
+The following settings need to be environment variables. See [Environmental Configuration](https://docs.craftcms.com/v3/config/environments.html) in the Craft docs to learn more about that.
 
 ```
 AZURE_STORAGE_ACCOUNT_NAME="account-name"

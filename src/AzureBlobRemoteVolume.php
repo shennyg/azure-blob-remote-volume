@@ -2,10 +2,8 @@
 /**
  * Azure Blob Remote Volume plugin for Craft CMS 3.x
  *
- * Azure Blob Remote Volume plugin for Craft CMS 3.x
- *
  * @link      https://sunnybyte.com
- * @copyright Copyright (c) 2019 Shen DeShayne
+ * @copyright Copyright (c) 2019 SunnyByte
  */
 
 namespace shennyg\azureblobremotevolume;
@@ -13,9 +11,11 @@ namespace shennyg\azureblobremotevolume;
 
 use Craft;
 use craft\base\Plugin;
+use craft\events\RegisterComponentTypesEvent;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
 
+use craft\services\Volumes;
 use yii\base\Event;
 
 /**
@@ -55,15 +55,6 @@ class AzureBlobRemoteVolume extends Plugin
         parent::init();
         self::$plugin = $this;
 
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                }
-            }
-        );
-
         Craft::info(
             Craft::t(
                 'azure-blob-remote-volume',
@@ -72,9 +63,13 @@ class AzureBlobRemoteVolume extends Plugin
             ),
             __METHOD__
         );
+
+        Event::on(
+            Volumes::class,
+            Volumes::EVENT_REGISTER_VOLUME_TYPES,
+            function(RegisterComponentTypesEvent $event) {
+                $event->types[] = AzureVolume::class;
+            }
+        );
     }
-
-    // Protected Methods
-    // =========================================================================
-
 }
