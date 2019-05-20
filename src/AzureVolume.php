@@ -16,6 +16,16 @@ use craft\base\FlysystemVolume;
  */
 class AzureVolume extends FlysystemVolume
 {
+    // Properties
+    // =========================================================================
+
+    /**
+     * @var string the type of storage, currently we are only implementing blob
+     *
+     * See https://docs.microsoft.com/en-us/azure/storage/common/storage-decide-blobs-files-disks
+     */
+    public $azureStorageType = 'blob';
+    
     // Static
     // =========================================================================
 
