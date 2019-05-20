@@ -2,7 +2,7 @@
     "name": "shennyg/azure-blob-remote-volume",
     "description": "Azure Blob Remote Volume plugin for Craft CMS 3.x",
     "type": "craft-plugin",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "keywords": [
         "craft",
         "cms",
