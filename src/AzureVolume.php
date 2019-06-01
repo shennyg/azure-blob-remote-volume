@@ -8,6 +8,7 @@ namespace shennyg\azureblobremotevolume;
 use League\Flysystem\AzureBlobStorage\AzureBlobStorageAdapter;
 use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 use craft\base\FlysystemVolume;
+use Craft;
 
 /**
  * Class AzureVolume
@@ -25,6 +26,26 @@ class AzureVolume extends FlysystemVolume
      * See https://docs.microsoft.com/en-us/azure/storage/common/storage-decide-blobs-files-disks
      */
     public $azureStorageType = 'blob';
+
+    /**
+     * @var string Azure Storage Account Name
+     */
+    public $accountName = '';
+
+    /**
+     * @var string Azure Storage Account Key
+     */
+    public $accountKey = '';
+
+    /**
+     * @var string Azure Storage Container Name
+     */
+    public $containerName = '';
+
+    /**
+     * @var string Subfolder to use
+     */
+    public $subfolder = '';
     
     // Static
     // =========================================================================
@@ -47,12 +68,64 @@ class AzureVolume extends FlysystemVolume
     {
         $endpoint = sprintf(
             'DefaultEndpointsProtocol=https;AccountName=%s;AccountKey=%s',
-            getenv('AZURE_STORAGE_ACCOUNT_NAME'),
-            getenv('AZURE_STORAGE_ACCOUNT_KEY')
+            $this->accountName,
+            $this->accountKey
         );
         $client = BlobRestProxy::createBlobService($endpoint);
 
-        $containerName = getenv('AZURE_STORAGE_CONTAINER_NAME');
-        return new AzureBlobStorageAdapter($client, $containerName);
+        $containerName = $this->containerName;
+        return new AzureBlobStorageAdapter($client, $containerName, $this->_subfolder());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules[] = [[
+            'accountName',
+            'accountKey',
+            'containerName'
+        ], 'required'];
+
+        return $rules;
+    }
+
+    // Public Methods
+    // =========================================================================
+
+    public function getRootUrl()
+    {
+        if (($rootUrl = parent::getRootUrl()) !== false) {
+            $rootUrl .= $this->_subfolder();
+        }
+        return $rootUrl;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettingsHtml()
+    {
+        return Craft::$app->getView()->renderTemplate('azure-blob-remote-volume/volumeSettings', [
+            'volume' => $this,
+        ]);
+    }
+
+    // Private Methods
+    // =========================================================================
+
+    /**
+     * Returns the parsed subfolder path
+     *
+     * @return string|null
+     */
+    private function _subfolder(): string
+    {
+        if ($this->subfolder && ($subfolder = rtrim($this->subfolder, '/')) !== '') {
+            return $subfolder . '/';
+        }
+        return '';
     }
 }

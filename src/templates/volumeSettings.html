@@ -1,0 +1,50 @@
+{% import "_includes/forms" as forms %}
+
+{# @TODO convert these to autosuggestField #}
+{% set accountNameInput = forms.text({
+    id: 'accountName',
+    name: 'accountName',
+    value: volume.accountName,
+}) %}
+{{ forms.field({
+    id: 'accountNameWrapper',
+    label: "Account Name",
+    required: "required",
+    instructions: 'The name of you Azure Storage Account. Find this in your Azure Portal, select your Storage account and select "Access keys" then copy the "Storage account name".'
+}, accountNameInput) }}
+
+{% set accountKeyInput = forms.text({
+    id: 'accountKey',
+    name: 'accountKey',
+    value: volume.accountKey,
+    type: 'password',
+}) %}
+{{ forms.field({
+    id: 'accountKeyWrapper',
+    label: "Account Key",
+    required: "required",
+    instructions: 'The Azure Storage Access key. Find this in your Azure Portal, select your Storage account and select "Access keys" then copy the key1 or key2 key.'
+}, accountKeyInput) }}
+
+{% set containerNameInput = forms.text({
+    id: 'containerName',
+    name: 'containerName',
+    value: volume.containerName,
+}) %}
+{{ forms.field({
+    id: 'containerNameWrapper',
+    label: "Container Name",
+    required: "required",
+    instructions: 'The name of you Azure Storage Blob Container. Find this in your Azure Portal, select your Storage account then Blobs and enter the value from the "NAME" column.'
+}, containerNameInput) }}
+
+{% set subfolderInput = forms.text({
+    id: 'subfolder',
+    name: 'subfolder',
+    value: volume.subfolder,
+}) %}
+{{ forms.field({
+    id: 'subfolderWrapper',
+    label: "Subfolder",
+    instructions: 'If you want to use a container’s subfolder as a Volume, specify the path to use here.'
+}, subfolderInput) }}

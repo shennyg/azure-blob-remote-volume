@@ -33,21 +33,14 @@ composer require shennyg/azure-blob-remote-volume
 
 ## Setup
 
-To create a new asset volume for your Azure Blob container, go to Settings → Assets, create a new volume, and set the Volume Type setting to "Azure". Toggle "Assets in this volume have public URLs" on and enter the base URL. Normally something like https://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/AZURE_STORAGE_CONTAINER_NAME/ or 
+To create a new asset volume for your Azure Blob container, go to Settings → Assets, create a new volume, and set the Volume Type setting to "Azure". Toggle "Assets in this volume have public URLs" on and enter the base URL. Normally something like https://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/AZURE_STORAGE_CONTAINER_NAME/ or use the https://AZURE_CDN_NAME.azureedge.net/AZURE_STORAGE_CONTAINER_NAME/ if you have a Azure CDN setup.
 
-The following settings need to be environment variables. See [Environmental Configuration](https://docs.craftcms.com/v3/config/environments.html) in the Craft docs to learn more about that.
-
-```
-AZURE_STORAGE_ACCOUNT_NAME="account-name"
-AZURE_STORAGE_ACCOUNT_KEY="account-key"
-AZURE_STORAGE_CONTAINER_NAME="container-name"
-```
+You will also need to enter the Azure Storage Account Name, Account Key and Container Name.
 
 ## Azure Blob Remote Volume Roadmap
 
 Some things to do, and ideas for potential features:
 
-* Release it
-* Allow saving the configs in the database and managing in the Craft CMS Control Panel. 
+* Force newer version of Craft CMS to allow for using autosuggestField in the New Volume page allowing backwards compatibility to v0.1.1. 
 
 Brought to you by [SunnyByte, pain-free web and app development](https://sunnybyte.com).
