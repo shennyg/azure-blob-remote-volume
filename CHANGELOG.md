@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.1 - 2019-06-07
+## Fixed
+- guess missing mime/content type
+
 ## 1.0.0 - 2019-05-31
 
 Breaking change! To migrate Volumes after upgrading this plugin, edit each Azure Volume and add the required fields from your ENV variables.
