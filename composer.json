@@ -29,7 +29,7 @@
     ],
     "require": {
         "craftcms/cms": "^3.0.0-RC1",
-        "league/flysystem-azure-blob-storage": "^0.1.5"
+        "league/flysystem-azure-blob-storage": "^0.1.6"
     },
     "autoload": {
         "psr-4": {
