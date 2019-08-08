@@ -46,7 +46,7 @@ class AzureVolume extends FlysystemVolume
      * @var string Subfolder to use
      */
     public $subfolder = '';
-    
+
     // Static
     // =========================================================================
 
@@ -68,12 +68,12 @@ class AzureVolume extends FlysystemVolume
     {
         $endpoint = sprintf(
             'DefaultEndpointsProtocol=https;AccountName=%s;AccountKey=%s',
-            $this->accountName,
-            $this->accountKey
+            Craft::parseEnv($this->accountName),
+            Craft::parseEnv($this->accountKey)
         );
         $client = BlobRestProxy::createBlobService($endpoint);
 
-        $containerName = $this->containerName;
+        $containerName = Craft::parseEnv($this->containerName);
         return new AzureBlobStorageAdapter($client, $containerName, $this->_subfolder());
     }
 
@@ -123,7 +123,10 @@ class AzureVolume extends FlysystemVolume
      */
     private function _subfolder(): string
     {
-        if ($this->subfolder && ($subfolder = rtrim($this->subfolder, '/')) !== '') {
+        if (
+            Craft::parseEnv($this->subfolder) &&
+            ($subfolder = rtrim(Craft::parseEnv($this->subfolder), '/')) !== ''
+        ) {
             return $subfolder . '/';
         }
         return '';

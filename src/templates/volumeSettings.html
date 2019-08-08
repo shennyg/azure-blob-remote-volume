@@ -1,50 +1,40 @@
 {% import "_includes/forms" as forms %}
 
-{# @TODO convert these to autosuggestField #}
-{% set accountNameInput = forms.text({
-    id: 'accountName',
+{{ forms.autosuggestField({
     name: 'accountName',
     value: volume.accountName,
-}) %}
-{{ forms.field({
-    id: 'accountNameWrapper',
+    id: 'accountName',
     label: "Account Name",
     required: "required",
-    instructions: 'The name of you Azure Storage Account. Find this in your Azure Portal, select your Storage account and select "Access keys" then copy the "Storage account name".'
-}, accountNameInput) }}
+    instructions: 'The name of you Azure Storage Account. Find this in your Azure Portal, select your Storage account and select "Access keys" then copy the "Storage account name".',
+    suggestEnvVars: true,
+}) }}
 
-{% set accountKeyInput = forms.text({
+{{ forms.autosuggestField({
     id: 'accountKey',
     name: 'accountKey',
     value: volume.accountKey,
-    type: 'password',
-}) %}
-{{ forms.field({
-    id: 'accountKeyWrapper',
     label: "Account Key",
     required: "required",
-    instructions: 'The Azure Storage Access key. Find this in your Azure Portal, select your Storage account and select "Access keys" then copy the key1 or key2 key.'
-}, accountKeyInput) }}
+    instructions: 'The Azure Storage Access key. Find this in your Azure Portal, select your Storage account and select "Access keys" then copy the key1 or key2 key.',
+    suggestEnvVars: true,
+}) }}
 
-{% set containerNameInput = forms.text({
+{{ forms.autosuggestField({
     id: 'containerName',
     name: 'containerName',
     value: volume.containerName,
-}) %}
-{{ forms.field({
-    id: 'containerNameWrapper',
     label: "Container Name",
     required: "required",
-    instructions: 'The name of you Azure Storage Blob Container. Find this in your Azure Portal, select your Storage account then Blobs and enter the value from the "NAME" column.'
-}, containerNameInput) }}
+    instructions: 'The name of you Azure Storage Blob Container. Find this in your Azure Portal, select your Storage account then Blobs and enter the value from the "NAME" column.',
+    suggestEnvVars: true,
+}) }}
 
-{% set subfolderInput = forms.text({
+{{ forms.autosuggestField({
     id: 'subfolder',
     name: 'subfolder',
     value: volume.subfolder,
-}) %}
-{{ forms.field({
-    id: 'subfolderWrapper',
     label: "Subfolder",
-    instructions: 'If you want to use a container’s subfolder as a Volume, specify the path to use here.'
-}, subfolderInput) }}
+    instructions: 'If you want to use a container’s subfolder as a Volume, specify the path to use here.',
+    suggestEnvVars: true,
+}) }}
