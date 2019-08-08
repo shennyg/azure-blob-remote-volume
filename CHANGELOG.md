@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## 1.0.2 - 2019-08-08
 ## Added
-- settings field are now auto suggest fields
+- settings fields are now auto suggest fields
 
 ## 1.0.1 - 2019-06-07
 ## Fixed
