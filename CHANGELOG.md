@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.2 - 2019-08-08
+## Added
+- settings fields are now auto suggest fields
+
 ## 1.0.1 - 2019-06-07
 ## Fixed
 - guess missing mime/content type
