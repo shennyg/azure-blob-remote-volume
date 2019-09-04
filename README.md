@@ -12,11 +12,11 @@ This plugin requires Craft CMS 3.0.0-beta.23 or later.
 
 You can install this plugin from the Plugin Store or with Composer.
 
-#### From the Plugin Store
+### From the Plugin Store
 
 Go to the Plugin Store in your project’s Control Panel and search for “Azure Blob Remote Volume”. Then click on the “Install” button in its modal window.
 
-#### With Composer
+### With Composer
 
 Open your terminal and run the following commands:
 
