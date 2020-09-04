@@ -47,6 +47,16 @@ class AzureVolume extends FlysystemVolume
      */
     public $subfolder = '';
 
+    /**
+     * @var string Azure Storage Blob Endpoint Host Name
+     */
+    public $blobEndpointHostName = '';
+
+    /**
+     * @var bool Azure Storage Blob Endpoint HTTPS Enabled
+     */
+    public $httpsEnabled = true;
+
     // Static
     // =========================================================================
 
@@ -66,11 +76,31 @@ class AzureVolume extends FlysystemVolume
      */
     protected function createAdapter()
     {
+        $scheme = $this->httpsEnabled ? 'https' : 'http';
+
         $endpoint = sprintf(
-            'DefaultEndpointsProtocol=https;AccountName=%s;AccountKey=%s',
+            'DefaultEndpointsProtocol=%s;AccountName=%s;AccountKey=%s',
+            $scheme,
             Craft::parseEnv($this->accountName),
             Craft::parseEnv($this->accountKey)
         );
+
+        if (isset($this->blobEndpointHostName))
+        {
+            // Chopping off the http or https part at the beginning of the hostname in case the user added it in.
+            $finalBlobEndpointHostName = preg_replace('/^https?\:\/\//', '', Craft::parseEnv($this->blobEndpointHostName));
+
+            if (trim($finalBlobEndpointHostName) !== '')
+            {
+                $blobEndpointSuffix = sprintf(
+                    ';BlobEndpoint=%s://%s',
+                    $scheme,
+                    $finalBlobEndpointHostName
+                );
+                $endpoint .= $blobEndpointSuffix;
+            }
+        }
+
         $client = BlobRestProxy::createBlobService($endpoint);
 
         $containerName = Craft::parseEnv($this->containerName);
