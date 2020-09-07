@@ -48,14 +48,9 @@ class AzureVolume extends FlysystemVolume
     public $subfolder = '';
 
     /**
-     * @var string Azure Storage Blob Endpoint Host Name
+     * @var string Azure Storage Blob Endpoint
      */
-    public $blobEndpointHostName = '';
-
-    /**
-     * @var bool Azure Storage Blob Endpoint HTTPS Enabled
-     */
-    public $httpsEnabled = true;
+    public $blobEndpoint = '';
 
     // Static
     // =========================================================================
@@ -76,30 +71,34 @@ class AzureVolume extends FlysystemVolume
      */
     protected function createAdapter()
     {
-        $scheme = $this->httpsEnabled ? 'https' : 'http';
+        $scheme = 'https';
+        $additionalConnnectionProperties = '';
 
-        $endpoint = sprintf(
-            'DefaultEndpointsProtocol=%s;AccountName=%s;AccountKey=%s',
-            $scheme,
-            Craft::parseEnv($this->accountName),
-            Craft::parseEnv($this->accountKey)
-        );
-
-        if (isset($this->blobEndpointHostName))
+        if (isset($this->blobEndpoint))
         {
-            // Chopping off the http or https part at the beginning of the hostname in case the user added it in.
-            $finalBlobEndpointHostName = preg_replace('/^https?\:\/\//', '', Craft::parseEnv($this->blobEndpointHostName));
+            $parsedBlobEndpoint = trim(Craft::parseEnv($this->blobEndpoint));
 
-            if (trim($finalBlobEndpointHostName) !== '')
+            if ($parsedBlobEndpoint !== '')
             {
-                $blobEndpointSuffix = sprintf(
-                    ';BlobEndpoint=%s://%s',
-                    $scheme,
-                    $finalBlobEndpointHostName
+                if(substr($parsedBlobEndpoint, 0, 7) === 'http://')
+                {
+                    $scheme = 'http';
+                }
+
+                $additionalConnnectionProperties .= sprintf(
+                    ';BlobEndpoint=%s',
+                    $parsedBlobEndpoint
                 );
-                $endpoint .= $blobEndpointSuffix;
             }
         }
+
+        $endpoint = sprintf(
+            'DefaultEndpointsProtocol=%s;AccountName=%s;AccountKey=%s%s',
+            $scheme,
+            Craft::parseEnv($this->accountName),
+            Craft::parseEnv($this->accountKey),
+            $additionalConnnectionProperties
+        );
 
         $client = BlobRestProxy::createBlobService($endpoint);
 

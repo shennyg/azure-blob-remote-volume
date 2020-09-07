@@ -35,24 +35,15 @@
     name: 'subfolder',
     value: volume.subfolder,
     label: "Subfolder",
-    instructions: 'If you want to use a container’s subfolder as a Volume, specify the path to use here.',
+    instructions: 'If you want to use a container\'s subfolder as a Volume, specify the path to use here.',
     suggestEnvVars: true,
 }) }}
 
 {{ forms.autosuggestField({
-    id: 'blobEndpointHostName',
-    name: 'blobEndpointHostName',
-    value: volume.blobEndpointHostName,
-    label: "Blob Endpoint Host Name",
-    instructions: 'The hostname of the Azure Storage Blob Endpoint to connect to. Use this if you have a non-standard Azure Storage Blob Endpoint or if you are connecting to a local Azure Storage Emulator. Leave blank to default to the standard Azure Storage Blob Endpoint.',
+    id: 'blobEndpoint',
+    name: 'blobEndpoint',
+    value: volume.blobEndpoint,
+    label: "Blob Endpoint URL",
+    instructions: 'The absolute URL of the Azure Storage Blob Endpoint to connect to. Use this if you have a non-standard Azure Storage Blob Endpoint or if you are connecting to a local Azure Storage Emulator. If supplied, the protocol of this URL will determine whether a connection is made using HTTP or HTTPS. Leave blank to default to the standard Azure Storage Blob Endpoint using HTTPS.',
     suggestEnvVars: true,
-}) }}
-
-{{ forms.lightswitchField({
-    id: 'httpsEnabled',
-    name: 'httpsEnabled',
-    label: "Enable HTTPS",
-    instructions: 'Enable or disable HTTPS connections to the Azure Storage account. Disable if you need to connect to a local Azure storage emulator that doesn\'t support HTTPS.',
-    on: volume.httpsEnabled,
-    first: true,
 }) }}
