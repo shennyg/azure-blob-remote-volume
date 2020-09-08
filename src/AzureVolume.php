@@ -47,6 +47,11 @@ class AzureVolume extends FlysystemVolume
      */
     public $subfolder = '';
 
+    /**
+     * @var string Azure Storage Blob Endpoint
+     */
+    public $blobEndpoint = '';
+
     // Static
     // =========================================================================
 
@@ -66,11 +71,35 @@ class AzureVolume extends FlysystemVolume
      */
     protected function createAdapter()
     {
+        $scheme = 'https';
+        $additionalConnnectionProperties = '';
+
+        if (isset($this->blobEndpoint))
+        {
+            $parsedBlobEndpoint = trim(Craft::parseEnv($this->blobEndpoint));
+
+            if ($parsedBlobEndpoint !== '')
+            {
+                if(substr($parsedBlobEndpoint, 0, 7) === 'http://')
+                {
+                    $scheme = 'http';
+                }
+
+                $additionalConnnectionProperties .= sprintf(
+                    ';BlobEndpoint=%s',
+                    $parsedBlobEndpoint
+                );
+            }
+        }
+
         $endpoint = sprintf(
-            'DefaultEndpointsProtocol=https;AccountName=%s;AccountKey=%s',
+            'DefaultEndpointsProtocol=%s;AccountName=%s;AccountKey=%s%s',
+            $scheme,
             Craft::parseEnv($this->accountName),
-            Craft::parseEnv($this->accountKey)
+            Craft::parseEnv($this->accountKey),
+            $additionalConnnectionProperties
         );
+
         $client = BlobRestProxy::createBlobService($endpoint);
 
         $containerName = Craft::parseEnv($this->containerName);
