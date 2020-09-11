@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- Adding support for connecting to Azure storage accounts with non-standard blob endpoint hostnames. See [Azure storage emulator docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator). Thanks [@sid-mansukhani](https://github.com/sid-mansukhani)
+- Adding support for connecting to Azure storage accounts with non-standard blob endpoint hostnames. See [Azure storage emulator docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator). Thanks [@sidm1983](https://github.com/sidm1983)
 
 ## 1.0.2 - 2019-09-03
 
