@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v1.1.1 - 2020-09-10
+
+### Added
+
+- Adding support for connecting to Azure storage accounts with non-standard blob endpoint hostnames. See [Azure storage emulator docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator). Thanks [@sid-mansukhani](https://github.com/sid-mansukhani)
+
 ## 1.0.2 - 2019-09-03
 
 ### Added
